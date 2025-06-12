@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralForge AI - 次世代AIソリューション</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <!-- 実験的ナビゲーション -->
+    <nav class="nav-experimental">
+        <div class="nav-orb" id="navOrb">
+            <span class="nav-icon">⚡</span>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="#home" class="nav-link" data-text="HOME">HOME</a>
+            <a href="#ai-solutions" class="nav-link" data-text="SOLUTIONS">SOLUTIONS</a>
+            <a href="#demo" class="nav-link" data-text="DEMO">DEMO</a>
+            <a href="#about" class="nav-link" data-text="ABOUT">ABOUT</a>
+            <a href="#contact" class="nav-link" data-text="CONTACT">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- カスタムカーソル -->
+    <div class="custom-cursor" id="cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
+    </div>
+
+    <!-- ヒーローセクション -->
+    <section id="home" class="hero">
+        <div class="hero-3d" id="hero3d"></div>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="NeuralForge AI">
+                NeuralForge AI
+            </h1>
+            <p class="hero-subtitle typing-effect">
+                <span class="text-gradient">AIの無限の可能性を解き放つ</span>
+            </p>
+            <div class="hero-stats">
+                <div class="stat-card glass-morph">
+                    <span class="stat-number" data-count="99.9">0</span>%
+                    <span class="stat-label">精度</span>
+                </div>
+                <div class="stat-card glass-morph">
+                    <span class="stat-number" data-count="1000">0</span>x
+                    <span class="stat-label">高速処理</span>
+                </div>
+                <div class="stat-card glass-morph">
+                    <span class="stat-number" data-count="24">0</span>/7
+                    <span class="stat-label">稼働率</span>
+                </div>
+            </div>
+            <button class="cta-button" id="exploreBtn">
+                <span class="button-text">探索開始</span>
+                <div class="button-glow"></div>
+            </button>
+        </div>
+        <div class="floating-particles" id="particles"></div>
+    </section>
+
+    <!-- AIソリューション -->
+    <section id="ai-solutions" class="solutions">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-accent">革新的な</span>AIソリューション
+            </h2>
+            <div class="solutions-grid">
+                <div class="solution-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content glass-morph">
+                        <div class="icon-3d">🧠</div>
+                        <h3>Neural Analytics</h3>
+                        <p>深層学習による高度なデータ分析で、ビジネスインサイトを瞬時に可視化</p>
+                        <div class="card-stats">
+                            <span class="badge">リアルタイム</span>
+                            <span class="badge">予測分析</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content glass-morph">
+                        <div class="icon-3d">🤖</div>
+                        <h3>AI Automation</h3>
+                        <p>業務プロセスを完全自動化し、生産性を飛躍的に向上</p>
+                        <div class="card-stats">
+                            <span class="badge">RPA</span>
+                            <span class="badge">ワークフロー最適化</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-card" data-tilt>
+                    <div class="card-glow"></div>
+                    <div class="card-content glass-morph">
+                        <div class="icon-3d">💬</div>
+                        <h3>Conversational AI</h3>
+                        <p>次世代の対話型AIで、顧客体験を革新的に変革</p>
+                        <div class="card-stats">
+                            <span class="badge">多言語対応</span>
+                            <span class="badge">感情分析</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- インタラクティブデモ -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-accent">体験型</span>AIデモンストレーション
+            </h2>
+            <div class="demo-container glass-morph">
+                <div class="demo-interface">
+                    <div class="demo-header">
+                        <span class="demo-status">● AI Ready</span>
+                        <div class="demo-controls">
+                            <button class="demo-btn" id="startDemo">開始</button>
+                            <button class="demo-btn" id="resetDemo">リセット</button>
+                        </div>
+                    </div>
+                    <div class="demo-content">
+                        <div class="ai-visualization" id="aiViz">
+                            <canvas id="neuralCanvas"></canvas>
+                        </div>
+                        <div class="demo-input">
+                            <textarea id="aiInput" placeholder="AIに質問を入力してください..."></textarea>
+                            <button class="submit-btn" id="submitQuery">
+                                <span>分析開始</span>
+                                <svg class="submit-icon" viewBox="0 0 24 24">
+                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="demo-output" id="aiOutput">
+                            <div class="output-placeholder">
+                                AIの応答がここに表示されます
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- アバウト -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">
+                        <span class="title-accent">未来を創る</span>テクノロジー
+                    </h2>
+                    <p class="about-text">
+                        NeuralForge AIは、最先端の人工知能技術を活用し、
+                        ビジネスの可能性を無限に広げます。
+                    </p>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <span class="tech-icon">⚡</span>
+                            <span>GPT-5 Integration</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🔮</span>
+                            <span>Quantum Computing</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🌐</span>
+                            <span>Edge AI</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-icon">🛡️</span>
+                            <span>Secure AI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="hologram-container" id="hologram"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- コンタクト -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-accent">未来への</span>第一歩
+            </h2>
+            <div class="contact-form glass-morph">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" required>
+                        <label for="name">お名前</label>
+                        <span class="form-line"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required>
+                        <label for="email">メールアドレス</label>
+                        <span class="form-line"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="4" required></textarea>
+                        <label for="message">メッセージ</label>
+                        <span class="form-line"></span>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <span>送信</span>
+                        <div class="submit-glow"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>NeuralForge AI</h3>
+                    <p>Shaping Tomorrow, Today</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">プライバシーポリシー</a>
+                    <a href="#" class="footer-link">利用規約</a>
+                    <a href="#" class="footer-link">採用情報</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link">𝕏</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">◉</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NeuralForge AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
